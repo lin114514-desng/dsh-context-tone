@@ -1,0 +1,44 @@
+{
+  "name": "dsh-context-tone",
+  "version": "0.1.0",
+  "private": true,
+  "description": "上下文占用色调：按占用档位给官方输入框上方的上下文胶囊改色（圆环 + 百分比），并在百分比右侧显示 emoji；四个分界值、四档颜色、四档 emoji 均可在插件配置页修改。纯客户端，不依赖桌宠与图片素材。",
+  "license": "MIT",
+  "type": "module",
+  "main": "lib/index.js",
+  "exports": {
+    ".": "./lib/index.js",
+    "./client": "./lib/client.js",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "lib",
+    "!lib/.dsh-ops-update-*.lock",
+    "cordis.patch.yml",
+    "icon.svg",
+    "README.md",
+    "INSTALL-PLAN.md"
+  ],
+  "engines": {
+    "node": ">=18",
+    "dsh": ">=0.2.1-rc.2"
+  },
+  "icon": "./icon.svg",
+  "dsh": {
+    "manifestVersion": 1,
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web"
+    }
+  },
+  "keywords": [
+    "dsh",
+    "dsh-plugin",
+    "context-usage",
+    "context-meter",
+    "web-ui",
+    "tone"
+  ]
+}

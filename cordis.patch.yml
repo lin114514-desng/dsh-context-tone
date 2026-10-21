@@ -1,0 +1,5 @@
+# dsh-context-tone bundle patch：挂一个 loader 条目，让 client-modules 扫描
+# 把本包的 lib/client.js 注册进 __DSH_BOOT__（id 必须等于包名）。
+- insert:
+    - id: dsh-context-tone
+      name: 'dsh-context-tone'

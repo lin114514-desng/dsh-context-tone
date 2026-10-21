@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" role="img" aria-label="上下文占用色调">
+  <circle cx="12" cy="12" r="8" fill="none" stroke="#9aa0a6" stroke-width="3" opacity="0.25"/>
+  <g fill="none" stroke-width="3" stroke-linecap="butt" transform="rotate(-90 12 12)">
+    <circle cx="12" cy="12" r="8" stroke="#eab308" stroke-dasharray="12.57 37.7" stroke-dashoffset="0"/>
+    <circle cx="12" cy="12" r="8" stroke="#f97316" stroke-dasharray="12.57 37.7" stroke-dashoffset="-12.57"/>
+    <circle cx="12" cy="12" r="8" stroke="#ef4444" stroke-dasharray="12.57 37.7" stroke-dashoffset="-25.13"/>
+    <circle cx="12" cy="12" r="8" stroke="#dc2626" stroke-dasharray="12.57 37.7" stroke-dashoffset="-37.7"/>
+  </g>
+</svg>
