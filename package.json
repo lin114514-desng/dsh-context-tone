@@ -16,7 +16,8 @@
     "lib",
     "!lib/.dsh-ops-update-*.lock",
     "cordis.patch.yml",
-    "icon.svg"
+    "icon.svg",
+    "screenshots"
   ],
   "engines": {
     "node": ">=18",

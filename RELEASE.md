@@ -19,7 +19,7 @@
    tar -tzf dsh-context-tone-<版本>.tgz
    ```
 
-   应包含 `package/package.json`、`package/lib/index.js`、`package/lib/client.js`、`package/cordis.patch.yml`、`package/icon.svg`、`package/README.md`、`package/LICENSE`。
+   应包含 `package/package.json`、`package/lib/index.js`、`package/lib/client.js`、`package/cordis.patch.yml`、`package/icon.svg`、`package/README.md`、`package/LICENSE`、`package/screenshots/context-meter-21-blue.png`。
 
 4. 提交改动并打 tag：
 
