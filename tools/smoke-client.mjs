@@ -128,12 +128,12 @@ function walk(node, visit) {
   for (const child of node.children || []) walk(child, visit)
 }
 
-// A. 无 configForms：内置默认档位。37% => 注意与偏高之间 => tier2 橙 #f97316 😰
+// A. 无 configForms：内置默认六档。37% => 35–50 档 => tier3 深橙 #ea580c 😭
 const a = await boot('a', null, '37%')
-assert.equal(a.getAttribute('data-dsh-ctx-tone'), '2')
-assert.equal(a.getAttribute('data-dsh-ctx-emoji'), '😰')
-assert.equal(a.style.getPropertyValue('--dsh-ctx-tone-color'), '#f97316')
-console.log('A ok: defaults -> tier2 orange')
+assert.equal(a.getAttribute('data-dsh-ctx-tone'), '3')
+assert.equal(a.getAttribute('data-dsh-ctx-emoji'), '😭')
+assert.equal(a.style.getPropertyValue('--dsh-ctx-tone-color'), '#ea580c')
+console.log('A ok: defaults -> tier3 deep orange')
 
 // A2. 默认第一档为蓝色：15% => tier1 蓝 #3b82f6 🤔
 const a2 = await boot('a2', null, '15%')
@@ -142,19 +142,19 @@ assert.equal(a2.getAttribute('data-dsh-ctx-emoji'), '🤔')
 assert.equal(a2.style.getPropertyValue('--dsh-ctx-tone-color'), '#3b82f6')
 console.log('A2 ok: default tier1 is blue')
 
-// B. 低于第一档：保持官方原色，无属性、无 emoji
+// B. 低于第一档：保持官方原色，但仍显示平静档 emoji 🥰
 const b = await boot('b', null, '8%')
 assert.equal(b.getAttribute('data-dsh-ctx-tone'), null)
-assert.equal(b.getAttribute('data-dsh-ctx-emoji'), null)
+assert.equal(b.getAttribute('data-dsh-ctx-emoji'), '🥰')
 assert.equal(b.style.getPropertyValue('--dsh-ctx-tone-color'), undefined)
-console.log('B ok: calm keeps official gray')
+console.log('B ok: calm keeps official gray with calm emoji')
 
 // C. 自定义分界值与颜色：37% 在 30–39 档 => tier3，emoji 留空 => 不写 emoji 属性
 const c = await boot('c', readyScope({
   enabled: true,
-  tier1: 10, tier2: 20, tier3: 30, tier4: 40,
-  color1: '#111111', color2: '#222222', color3: '#333333', color4: '#444444',
-  emoji1: 'A', emoji2: 'B', emoji3: '', emoji4: 'D',
+  tier1: 10, tier2: 20, tier3: 30, tier4: 40, tier5: 60,
+  color1: '#111111', color2: '#222222', color3: '#333333', color4: '#444444', color5: '#555555',
+  emoji0: 'Z', emoji1: 'A', emoji2: 'B', emoji3: '', emoji4: 'D', emoji5: 'E',
 }), '37%')
 assert.equal(c.getAttribute('data-dsh-ctx-tone'), '3')
 assert.equal(c.getAttribute('data-dsh-ctx-emoji'), null)
@@ -164,25 +164,25 @@ console.log('C ok: custom tiers/colors, empty emoji suppressed')
 // D. 总开关关闭：不写任何属性
 const d = await boot('d', readyScope({
   enabled: false,
-  tier1: 12, tier2: 25, tier3: 50, tier4: 75,
-  color1: '#eab308', color2: '#f97316', color3: '#ef4444', color4: '#dc2626',
-  emoji1: '🤔', emoji2: '😰', emoji3: '😭', emoji4: '😱',
+  tier1: 12, tier2: 25, tier3: 35, tier4: 50, tier5: 80,
+  color1: '#3b82f6', color2: '#f97316', color3: '#ea580c', color4: '#ef4444', color5: '#dc2626',
+  emoji0: '🥰', emoji1: '🤔', emoji2: '😖', emoji3: '😭', emoji4: '😰', emoji5: '😵',
 }), '64%')
 assert.equal(d.getAttribute('data-dsh-ctx-tone'), null)
 assert.equal(d.getAttribute('data-dsh-ctx-emoji'), null)
 assert.equal(d.style.getPropertyValue('--dsh-ctx-tone-color'), undefined)
 console.log('D ok: disabled leaves the meter untouched')
 
-// E. 分界值乱序：整组分界回退默认（37% => tier2），颜色仍按字段取值
+// E. 分界值乱序：整组分界回退默认（37% => tier3），颜色仍按字段取值
 const e = await boot('e', readyScope({
   enabled: true,
-  tier1: 50, tier2: 12, tier3: 25, tier4: 75,
-  color1: '#111111', color2: '#222222', color3: '#333333', color4: '#444444',
-  emoji1: 'A', emoji2: 'B', emoji3: 'C', emoji4: 'D',
+  tier1: 50, tier2: 12, tier3: 25, tier4: 75, tier5: 90,
+  color1: '#111111', color2: '#222222', color3: '#333333', color4: '#444444', color5: '#555555',
+  emoji0: 'Z', emoji1: 'A', emoji2: 'B', emoji3: 'C', emoji4: 'D', emoji5: 'E',
 }), '37%')
-assert.equal(e.getAttribute('data-dsh-ctx-tone'), '2')
-assert.equal(e.getAttribute('data-dsh-ctx-emoji'), 'B')
-assert.equal(e.style.getPropertyValue('--dsh-ctx-tone-color'), '#222222')
+assert.equal(e.getAttribute('data-dsh-ctx-tone'), '3')
+assert.equal(e.getAttribute('data-dsh-ctx-emoji'), 'C')
+assert.equal(e.style.getPropertyValue('--dsh-ctx-tone-color'), '#333333')
 console.log('E ok: non-increasing tiers fall back to defaults (colors stay per-field)')
 
 // F. 配置页：注册 key 正确、summary 文案、page 渲染、保存请求的 ops 与 revision
@@ -204,9 +204,9 @@ const form = {
     writable: true,
     value: {
       enabled: true,
-      tier1: 12, tier2: 25, tier3: 50, tier4: 75,
-      color1: '#eab308', color2: '#f97316', color3: '#ef4444', color4: '#dc2626',
-      emoji1: '🤔', emoji2: '😰', emoji3: '😭', emoji4: '😱',
+      tier1: 12, tier2: 25, tier3: 35, tier4: 50, tier5: 80,
+      color1: '#3b82f6', color2: '#f97316', color3: '#ea580c', color4: '#ef4444', color5: '#dc2626',
+      emoji0: '🥰', emoji1: '🤔', emoji2: '😖', emoji3: '😭', emoji4: '😰', emoji5: '😵',
     },
   },
   async mutate(ops, revision) { recorded = { ops, revision }; return true },
@@ -223,10 +223,11 @@ assert.equal(saveButton.props.disabled, true) // 未改动时禁用
 await saveButton.props.onClick()
 assert.ok(recorded, 'mutate called')
 assert.equal(recorded.revision, 3)
-assert.equal(recorded.ops.length, 13)
+assert.equal(recorded.ops.length, 17)
 assert.deepEqual(recorded.ops[0], { op: 'set', path: ['enabled'], value: true })
 assert.deepEqual(recorded.ops[1], { op: 'set', path: ['tier1'], value: 12 })
-assert.deepEqual(recorded.ops[12], { op: 'set', path: ['emoji4'], value: '😱' })
-console.log('F ok: config page renders, save sends 13 set-ops with the snapshot revision')
+assert.deepEqual(recorded.ops[11], { op: 'set', path: ['emoji0'], value: '🥰' })
+assert.deepEqual(recorded.ops[16], { op: 'set', path: ['emoji5'], value: '😵' })
+console.log('F ok: config page renders, save sends 17 set-ops with the snapshot revision')
 
 console.log('ALL CLIENT CASES PASSED')
