@@ -135,6 +135,13 @@ assert.equal(a.getAttribute('data-dsh-ctx-emoji'), '😰')
 assert.equal(a.style.getPropertyValue('--dsh-ctx-tone-color'), '#f97316')
 console.log('A ok: defaults -> tier2 orange')
 
+// A2. 默认第一档为蓝色：15% => tier1 蓝 #3b82f6 🤔
+const a2 = await boot('a2', null, '15%')
+assert.equal(a2.getAttribute('data-dsh-ctx-tone'), '1')
+assert.equal(a2.getAttribute('data-dsh-ctx-emoji'), '🤔')
+assert.equal(a2.style.getPropertyValue('--dsh-ctx-tone-color'), '#3b82f6')
+console.log('A2 ok: default tier1 is blue')
+
 // B. 低于第一档：保持官方原色，无属性、无 emoji
 const b = await boot('b', null, '8%')
 assert.equal(b.getAttribute('data-dsh-ctx-tone'), null)
