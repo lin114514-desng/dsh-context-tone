@@ -3,13 +3,19 @@
 //   node toggle-dsh-context-tone.mjs on     -> 热挂载（前提：包已在 profile dependencies + bundles）
 //   node toggle-dsh-context-tone.mjs off    -> 热卸载
 //   node toggle-dsh-context-tone.mjs status -> 查看当前激活状态
-// 端口每次启动会变：执行时以当前 GUI URL 为准，用 --port 覆盖（默认 2058）。
+// 端口每次启动会变：用 --port 指定，或设环境变量 DSH_GUI_PORT。
 import http from 'node:http'
 
 const arg = process.argv[2] || 'status'
 const portIndex = process.argv.indexOf('--port')
-const PORT = portIndex > -1 ? Number.parseInt(process.argv[portIndex + 1], 10) : 2058
+const RAW_PORT = portIndex > -1 ? process.argv[portIndex + 1] : process.env.DSH_GUI_PORT
+const PORT = Number.parseInt(RAW_PORT, 10)
 const NAME = 'dsh-context-tone'
+
+if (!RAW_PORT) {
+  console.error('缺少端口：用 --port <当前 GUI 端口>，或设环境变量 DSH_GUI_PORT')
+  process.exit(1)
+}
 
 if (!Number.isInteger(PORT) || PORT <= 0) {
   console.error('无效端口；用 --port <当前 GUI 端口>')

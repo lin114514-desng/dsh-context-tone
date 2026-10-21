@@ -2,8 +2,9 @@
   "name": "dsh-context-tone",
   "version": "0.2.1",
   "private": true,
-  "description": "上下文占用色调：按占用档位给官方输入框上方的上下文胶囊改色（圆环 + 百分比），并在百分比右侧显示 emoji；五个分界值、五档颜色、六档 emoji 均可在插件配置页修改。纯客户端，不依赖桌宠与图片素材。",
+  "description": "上下文占用色调：按占用档位给 DeepSeek Harness 输入区的上下文胶囊改色（圆环 + 百分比），并在百分比右侧显示 emoji；五个分界值、五档颜色、六档 emoji 均可在插件配置页修改。纯客户端，不依赖桌宠与图片素材。",
   "license": "MIT",
+  "author": "Lin Beilin (林北林)",
   "type": "module",
   "main": "lib/index.js",
   "exports": {
@@ -15,15 +16,24 @@
     "lib",
     "!lib/.dsh-ops-update-*.lock",
     "cordis.patch.yml",
-    "icon.svg",
-    "README.md",
-    "INSTALL-PLAN.md"
+    "icon.svg"
   ],
   "engines": {
     "node": ">=18",
     "dsh": ">=0.2.1-rc.2"
   },
   "icon": "./icon.svg",
+  "scripts": {
+    "test": "node tools/smoke-client.mjs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lin114514-desng/dsh-context-tone.git"
+  },
+  "homepage": "https://github.com/lin114514-desng/dsh-context-tone#readme",
+  "bugs": {
+    "url": "https://github.com/lin114514-desng/dsh-context-tone/issues"
+  },
   "dsh": {
     "manifestVersion": 1,
     "bundle": {
@@ -39,6 +49,7 @@
     "context-usage",
     "context-meter",
     "web-ui",
-    "tone"
+    "tone",
+    "emoji"
   ]
 }
