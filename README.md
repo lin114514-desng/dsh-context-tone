@@ -6,7 +6,9 @@ DeepSeek Harness 的纯客户端 Web 插件：按上下文占用档位给输入�
 - 不引入表情包与图片素材，不依赖其他插件。
 - 插件只读胶囊上的百分比数字，不读取对话内容。
 
-![占用 21% 时的胶囊：蓝色圆环、蓝色百分比与 🤔](screenshots/context-meter-21-blue.png)
+| 占用低（平静档：官方灰 + 🥰） | 占用 21%（注意档：蓝 `#3b82f6` + 🤔） |
+|---|---|
+| ![占用 2%：官方灰圆环与百分比，右侧 🥰](screenshots/context-meter-2-calm.png) | ![占用 21%：蓝色圆环、蓝色百分比，右侧 🤔](screenshots/context-meter-21-blue.png) |
 
 ## 档位
 
